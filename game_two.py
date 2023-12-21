@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = '刘志奇'
 """
-猜单词
+ 猜单词
 """
 
 import random
