@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = '刘志奇'
 """
-贪吃蛇
+ 贪吃蛇
 """
 
 import pygame
