@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = '刘志奇'
 """
- 年龄和性别检测
+ 年龄和性别检测（依赖于训练模型）
  1、人脸检测
  2、预测图像中人的性别
  3、预测图像中人的年龄
@@ -28,20 +28,20 @@ def getFaceBox(net, frame, conf_threshold=0.7):
             x2 = int(detections[0, 0, i, 5] * frameWidth)
             y2 = int(detections[0, 0, i, 6] * frameHeight)
             bboxes.append([x1, y1, x2, y2])
-            cv.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight/150)), 8)
+            cv.rectangle(frameOpencvDnn, (x1, y1), (x2, y2), (0, 255, 0), int(round(frameHeight / 150)), 8)
     return frameOpencvDnn, bboxes
 
 
 # 性别
-genderProto = "gender_deploy.prototxt"
-genderModel = "gender_net.caffemodel"
+genderProto = "D:\python\model\gender_deploy.prototxt"
+genderModel = "D:\python\model\gender_net.caffemodel"
 genderNet = cv.dnn.readNet(genderModel, genderProto)
 # 性别参数
 genderList = ['Male', 'Female']
 
 # 年龄
-ageProto = "age_deploy.prototxt"
-ageModel = "age_net.caffemodel"
+ageProto = "D:\python\model\\age_deploy.prototxt"
+ageModel = "D:\python\model\\age_net.caffemodel"
 ageNet = cv.dnn.readNet(ageModel, ageProto)
 # 年龄参数
 ageList = ['(0 - 2)', '(4 - 6)', '(8 - 12)', '(15 - 20)', '(25 - 32)', '(38 - 43)', '(48 - 53)', '(60 - 100)']
@@ -50,12 +50,12 @@ MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
 padding = 20
 
 # 人脸
-faceProto = 'opencv_face_detector.pbtxt'
-faceModel = 'opencv_face_detector_uint8.pb'
+faceProto = 'D:\python\model\opencv_face_detector.pbtxt'
+faceModel = 'D:\python\model\opencv_face_detector_uint8.pb'
 faceNet = cv.dnn.readNet(faceModel, faceProto)
 
 # 读取图片
-frame = cv.imread('image1.jpg')
+frame = cv.imread('D:\picture\images\\narendra_modi.jpg')
 frameFace, bboxes = getFaceBox(faceNet, frame)
 
 for bbox in bboxes:
@@ -77,6 +77,7 @@ for bbox in bboxes:
     label = "{}, {}".format(gender, age)
     cv.namedWindow("Age Gender Demo", 0)
     cv.resizeWindow("Age Gender Demo", 900, 500)
-    cv.putText(frameFace, label, (bbox[0], bbox[1] - 20), cv.FONT_HERSHEY_SIMPLEX, 0.8, (255, 0, 0), 3, cv.LINE_AA)
+    cv.putText(frameFace, label, (bbox[0], bbox[1] - 10), cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2, cv.LINE_AA)
     cv.imshow("Age Gender Demo", frameFace)
+    cv.imwrite("D:\picture\images\\narendra_modi_.jpg", frameFace)
     cv.waitKey(0)
