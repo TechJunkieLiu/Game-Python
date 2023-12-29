@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 __author__ = '刘志奇'
+"""
+ OpenCV 测试
+"""
 
 import cv2
 import numpy as np

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 __author__ = '刘志奇'
 """
- 年龄和性别检测（依赖于训练模型）
+ OpenCV 年龄和性别检测（依赖于训练模型）
  1、人脸检测
  2、预测图像中人的性别
  3、预测图像中人的年龄
@@ -77,7 +77,7 @@ for bbox in bboxes:
     label = "{}, {}".format(gender, age)
     cv.namedWindow("Age Gender Demo", 0)
     cv.resizeWindow("Age Gender Demo", 900, 500)
-    cv.putText(frameFace, label, (bbox[0], bbox[1] - 10), cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2, cv.LINE_AA)
+    cv.putText(frameFace, label, (bbox[0], bbox[1] - 50), cv.FONT_HERSHEY_SIMPLEX, 0.6, (255, 0, 0), 2, cv.LINE_AA)
     cv.imshow("Age Gender Demo", frameFace)
     cv.imwrite("D:\picture\images\\narendra_modi_.jpg", frameFace)
     cv.waitKey(0)
